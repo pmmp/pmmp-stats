@@ -15,7 +15,7 @@ func Setup() *gorm.DB {
 	}
 
 	db.LogMode(true)
-	db.AutoMigrate(&Plugin{}, &Machine{}, &Server{})
+	db.AutoMigrate(&Plugin{}, &Server{})
 
 	return db
 }

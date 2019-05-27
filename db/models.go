@@ -19,28 +19,21 @@ type Plugin struct {
 	Enabled bool   `gorm:"PRIMARY_KEY" sql:"index"`
 }
 
-// Machine contains a DB model containing machine information
-type Machine struct {
-	DefaultModel
-	UniqueMachineID string `gorm:"PRIMARY_KEY" sql:"index"`
-	OperatingSystem string
-	Cores           int
-	PhpVersion      string
-	Machine         string
-	Release         string
-	Platform        string
-	MainMemory      int
-	TotalMemory     int
-	AvailableMemory int
-	ThreadCount     int
-}
-
 // Server contains a DB model containing server information
 type Server struct {
 	DefaultModel
-	UniqueServerID     string  `gorm:"PRIMARY_KEY" sql:"index"`
-	UniqueMachineID    string  `gorm:"PRIMARY_KEY" sql:"index"`
-	MachineData        Machine `gorm:"foreignkey:UniqueMachineID;association_foreignkey:unique_machine_id"`
+	UniqueServerID     string `gorm:"PRIMARY_KEY" sql:"index"`
+	UniqueMachineID    string `gorm:"PRIMARY_KEY" sql:"index"`
+	OperatingSystem    string
+	Cores              int
+	PhpVersion         string
+	Machine            string
+	Release            string
+	Platform           string
+	MainMemory         int
+	TotalMemory        int
+	AvailableMemory    int
+	ThreadCount        int
 	Port               int
 	Software           string
 	FullVersion        string

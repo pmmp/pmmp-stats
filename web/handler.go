@@ -20,20 +20,17 @@ func handlePayload(dataBase *gorm.DB) func(c *gin.Context) {
 		var data db.Server
 
 		serverData := db.Server{
-			MachineData: db.Machine{
-				UniqueMachineID: payloadData.UniqueMachineID,
-				OperatingSystem: payloadData.System.OperatingSystem,
-				Cores:           payloadData.System.Cores,
-				PhpVersion:      payloadData.System.PhpVersion,
-				Machine:         payloadData.System.Machine,
-				Release:         payloadData.System.Release,
-				Platform:        payloadData.System.Platform,
-				MainMemory:      payloadData.System.MainMemory,
-				TotalMemory:     payloadData.System.TotalMemory,
-				AvailableMemory: payloadData.System.AvailableMemory,
-				ThreadCount:     payloadData.System.ThreadCount,
-			},
 			UniqueMachineID:    payloadData.UniqueMachineID,
+			OperatingSystem:    payloadData.System.OperatingSystem,
+			Cores:              payloadData.System.Cores,
+			PhpVersion:         payloadData.System.PhpVersion,
+			Machine:            payloadData.System.Machine,
+			Release:            payloadData.System.Release,
+			Platform:           payloadData.System.Platform,
+			MainMemory:         payloadData.System.MainMemory,
+			TotalMemory:        payloadData.System.TotalMemory,
+			AvailableMemory:    payloadData.System.AvailableMemory,
+			ThreadCount:        payloadData.System.ThreadCount,
 			UniqueServerID:     payloadData.UniqueServerID,
 			Port:               payloadData.Server.Port,
 			Software:           payloadData.Server.Software,
@@ -62,13 +59,6 @@ func handlePayload(dataBase *gorm.DB) func(c *gin.Context) {
 				Enabled: plugin.Enabled,
 			})
 		}
-
-		// dataBase.Preload("MachineData", db.Machine{
-		// 	UniqueMachineID: payloadData.UniqueMachineID,
-		// }).Preload("Plugins").Where(db.Server{
-		// 	UniqueServerID:  payloadData.UniqueServerID,
-		// 	UniqueMachineID: payloadData.UniqueMachineID,
-		// }).First(&data)
 
 		dataBase.Where(db.Server{
 			UniqueServerID:  payloadData.UniqueServerID,
