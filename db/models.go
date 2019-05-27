@@ -16,7 +16,7 @@ type Plugin struct {
 	DefaultModel
 	Name    string `gorm:"PRIMARY_KEY" sql:"index"`
 	Version string `gorm:"PRIMARY_KEY" sql:"index"`
-	Enabled bool
+	Enabled bool   `gorm:"PRIMARY_KEY" sql:"index"`
 }
 
 // Machine contains a DB model containing machine information

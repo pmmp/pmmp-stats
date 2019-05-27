@@ -17,6 +17,8 @@ func handlePayload(dataBase *gorm.DB) func(c *gin.Context) {
 			return
 		}
 
+		var data db.Server
+
 		serverData := db.Server{
 			MachineData: db.Machine{
 				UniqueMachineID: payloadData.UniqueMachineID,
@@ -61,9 +63,16 @@ func handlePayload(dataBase *gorm.DB) func(c *gin.Context) {
 			})
 		}
 
-		var data db.Server
+		// dataBase.Preload("MachineData", db.Machine{
+		// 	UniqueMachineID: payloadData.UniqueMachineID,
+		// }).Preload("Plugins").Where(db.Server{
+		// 	UniqueServerID:  payloadData.UniqueServerID,
+		// 	UniqueMachineID: payloadData.UniqueMachineID,
+		// }).First(&data)
+
 		dataBase.Where(db.Server{
-			UniqueServerID: payloadData.UniqueServerID,
+			UniqueServerID:  payloadData.UniqueServerID,
+			UniqueMachineID: payloadData.UniqueMachineID,
 		}).Assign(serverData).FirstOrCreate(&data)
 	}
 }
